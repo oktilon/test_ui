@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+	<gresource>
+		<file preprocess="xml-stripblanks">src/ui/window.glade</file>
+		<file>src/resources/top_logo.png</file>
+		<file>src/resources/backBtn.png</file>
+		<file>src/resources/cross.png</file>
+	</gresource>
+</gresources>

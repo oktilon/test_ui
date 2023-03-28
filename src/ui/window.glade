@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <!-- interface-local-resource-path /home/denis/projects/defigo/services/ui/src -->
+  <object class="GtkImage" id="imgBack">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resource">backBtn.png</property>
+  </object>
+  <object class="GtkImage" id="imgCross">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resource">cross.png</property>
+  </object>
+  <object class="GtkWindow" id="mainWindow">
+    <property name="name">winMain</property>
+    <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <property name="default-width">800</property>
+    <property name="default-height">1280</property>
+    <property name="decorated">False</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="width-request">800</property>
+        <property name="height-request">1280</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child>
+          <object class="GtkImage" id="top_logo">
+            <property name="width-request">186</property>
+            <property name="height-request">48</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="resource">top_logo.png</property>
+          </object>
+          <packing>
+            <property name="x">307</property>
+            <property name="y">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btnClose">
+            <property name="width-request">48</property>
+            <property name="height-request">48</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="image">imgBack</property>
+            <property name="relief">none</property>
+          </object>
+          <packing>
+            <property name="x">728</property>
+            <property name="y">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btnBack">
+            <property name="width-request">48</property>
+            <property name="height-request">48</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="image">imgCross</property>
+            <property name="relief">none</property>
+          </object>
+          <packing>
+            <property name="x">24</property>
+            <property name="y">24</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblInfo">
+            <property name="width-request">752</property>
+            <property name="height-request">30</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">click a back button</property>
+            <property name="track-visited-links">False</property>
+          </object>
+          <packing>
+            <property name="x">24</property>
+            <property name="y">96</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
