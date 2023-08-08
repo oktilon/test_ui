@@ -2,19 +2,37 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <!-- interface-local-resource-path /home/denis/projects/defigo/services/ui/src -->
+  <!-- interface-css-provider-path window.css -->
   <object class="GtkImage" id="imgBack">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="resource">backBtn.png</property>
+    <property name="resource">/com/getdefigo/ui/src/resources/backBtn.png</property>
   </object>
   <object class="GtkImage" id="imgCross">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="resource">cross.png</property>
+    <property name="resource">/com/getdefigo/ui/src/resources/cross.png</property>
+  </object>
+  <object class="GtkImage" id="imgGrayCross">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resource">/com/getdefigo/ui/src/resources/gray_cross.png</property>
+  </object>
+  <object class="GtkImage" id="imgPageBack">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resource">/com/getdefigo/ui/src/resources/previousPage.png</property>
+  </object>
+  <object class="GtkImage" id="imgPageNext">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resource">/com/getdefigo/ui/src/resources/nextPage.png</property>
   </object>
   <object class="GtkWindow" id="mainWindow">
     <property name="name">winMain</property>
+    <property name="width-request">800</property>
+    <property name="height-request">1280</property>
+    <property name="visible">True</property>
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
     <property name="default-width">800</property>
@@ -26,13 +44,36 @@
         <property name="height-request">1280</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
+        <property name="valign">start</property>
+        <child>
+          <object class="GtkButton" id="btnBack">
+            <property name="width-request">48</property>
+            <property name="height-request">48</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="focus-on-click">False</property>
+            <property name="receives-default">False</property>
+            <property name="image">imgBack</property>
+            <property name="relief">none</property>
+            <style>
+              <class name="top_button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="x">24</property>
+            <property name="y">24</property>
+          </packing>
+        </child>
         <child>
           <object class="GtkImage" id="top_logo">
             <property name="width-request">186</property>
             <property name="height-request">48</property>
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="resource">top_logo.png</property>
+            <property name="can-focus">True</property>
+            <property name="resource">/com/getdefigo/ui/src/resources/top_logo.png</property>
+            <style>
+              <class name="logo_class"/>
+            </style>
           </object>
           <packing>
             <property name="x">307</property>
@@ -45,9 +86,13 @@
             <property name="height-request">48</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="image">imgBack</property>
+            <property name="focus-on-click">False</property>
+            <property name="receives-default">False</property>
+            <property name="image">imgCross</property>
             <property name="relief">none</property>
+            <style>
+              <class name="top_button"/>
+            </style>
           </object>
           <packing>
             <property name="x">728</property>
@@ -55,35 +100,469 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="btnBack">
-            <property name="width-request">48</property>
-            <property name="height-request">48</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="image">imgCross</property>
-            <property name="relief">none</property>
-          </object>
-          <packing>
-            <property name="x">24</property>
-            <property name="y">24</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="lblInfo">
-            <property name="width-request">752</property>
-            <property name="height-request">30</property>
+          <object class="GtkFrame">
+            <property name="width-request">100</property>
+            <property name="height-request">58</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="label" translatable="yes">click a back button</property>
-            <property name="track-visited-links">False</property>
+            <property name="label-xalign">0</property>
+            <property name="label-yalign">0</property>
+            <property name="shadow-type">none</property>
+            <child>
+              <object class="GtkAlignment">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="xscale">0</property>
+                <property name="yscale">0</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="width-request">752</property>
+                    <property name="height-request">58</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <child>
+                      <object class="GtkImage" id="lblSearch">
+                        <property name="width-request">44</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="resource">/com/getdefigo/ui/src/resources/magnifyingGlass.png</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="searchEdit">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="editable">False</property>
+                        <property name="placeholder-text" translatable="yes">Search</property>
+                        <style>
+                          <class name="search_class"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btnClear">
+                        <property name="width-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="receives-default">False</property>
+                        <property name="image">imgGrayCross</property>
+                        <property name="relief">none</property>
+                        <style>
+                          <class name="clear_btn"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <style>
+              <class name="search_frame"/>
+            </style>
           </object>
           <packing>
             <property name="x">24</property>
             <property name="y">96</property>
           </packing>
         </child>
+        <child>
+          <object class="GtkFlowBox" id="main_flow_box">
+            <property name="width-request">752</property>
+            <property name="height-request">50</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
+            <property name="margin-top">24</property>
+            <property name="column-spacing">20</property>
+            <property name="row-spacing">20</property>
+            <property name="min-children-per-line">3</property>
+            <property name="max-children-per-line">3</property>
+            <child>
+              <object class="GtkFlowBoxChild">
+                <property name="width-request">235</property>
+                <property name="height-request">235</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="width-request">207</property>
+                    <property name="height-request">191</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="width-request">56</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="resource">/com/getdefigo/ui/src/resources/user_icon.png</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Mikhailo Sorokin</property>
+                        <property name="justify">center</property>
+                        <property name="ellipsize">end</property>
+                        <property name="single-line-mode">True</property>
+                        <property name="max-width-chars">20</property>
+                        <style>
+                          <class name="unit_text"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">unit 11</property>
+                        <property name="justify">center</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="ellipsize">end</property>
+                        <property name="max-width-chars">23</property>
+                        <property name="lines">2</property>
+                        <style>
+                          <class name="unit_desc"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="unit_box"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkFlowBoxChild">
+                <property name="width-request">235</property>
+                <property name="height-request">235</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="width-request">207</property>
+                    <property name="height-request">191</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="width-request">56</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="resource">/com/getdefigo/ui/src/resources/user_icon.png</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">First Name Secondary Assignement Longer than two lines</property>
+                        <property name="justify">center</property>
+                        <property name="wrap">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="max-width-chars">20</property>
+                        <property name="lines">2</property>
+                        <style>
+                          <class name="unit_text"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">long very long very very long very very long description used</property>
+                        <property name="justify">center</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="ellipsize">end</property>
+                        <property name="max-width-chars">23</property>
+                        <property name="lines">2</property>
+                        <style>
+                          <class name="unit_desc"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="unit_box"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkFlowBoxChild">
+                <property name="width-request">235</property>
+                <property name="height-request">235</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="width-request">207</property>
+                    <property name="height-request">56</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="width-request">56</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="resource">/com/getdefigo/ui/src/resources/user_icon.png</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">Volodya Shats</property>
+                        <property name="justify">center</property>
+                        <property name="ellipsize">end</property>
+                        <property name="single-line-mode">True</property>
+                        <property name="max-width-chars">20</property>
+                        <style>
+                          <class name="unit_text"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="width-request">207</property>
+                        <property name="height-request">56</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label" translatable="yes">unit 1 long name and long description</property>
+                        <property name="justify">center</property>
+                        <property name="wrap">True</property>
+                        <property name="wrap-mode">word-char</property>
+                        <property name="ellipsize">end</property>
+                        <property name="max-width-chars">23</property>
+                        <property name="lines">2</property>
+                        <style>
+                          <class name="unit_desc"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <style>
+                  <class name="unit_box"/>
+                </style>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">24</property>
+            <property name="y">154</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="width-request">800</property>
+            <property name="height-request">68</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">24</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btnPrev">
+                <property name="label" translatable="yes">Previous page</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">start</property>
+                <property name="valign">baseline</property>
+                <property name="hexpand">True</property>
+                <property name="image">imgPageBack</property>
+                <property name="relief">none</property>
+                <property name="always-show-image">True</property>
+                <style>
+                  <class name="page_btn"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btnNext">
+                <property name="label" translatable="yes">Next page</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="image">imgPageNext</property>
+                <property name="relief">none</property>
+                <property name="image-position">right</property>
+                <property name="always-show-image">True</property>
+                <style>
+                  <class name="page_btn"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">24</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <style>
+              <class name="pager_class"/>
+            </style>
+          </object>
+          <packing>
+            <property name="y">1212</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEventBox" id="keypad">
+            <property name="width-request">800</property>
+            <property name="height-request">200</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkFixed" id="keypad_fixed">
+                <property name="width-request">800</property>
+                <property name="height-request">200</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+              </object>
+            </child>
+            <style>
+              <class name="keypad_class"/>
+            </style>
+          </object>
+          <packing>
+            <property name="y">1012</property>
+          </packing>
+        </child>
       </object>
     </child>
+    <style>
+      <class name="main_style"/>
+    </style>
   </object>
 </interface>

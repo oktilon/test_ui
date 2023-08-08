@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-	<gresource>
+	<gresource prefix="/com/getdefigo/ui">
 		<file preprocess="xml-stripblanks">src/ui/window.glade</file>
-		<file>src/resources/top_logo.png</file>
+		<file>src/ui/window.css</file>
 		<file>src/resources/backBtn.png</file>
+		<file>src/resources/blank.png</file>
+		<file>src/resources/blankSquare.png</file>
+		<file>src/resources/brightness_high.png</file>
+		<file>src/resources/brightness_low.png</file>
+		<file>src/resources/call_btn.png</file>
+		<file>src/resources/calling_icon.png</file>
+		<file>src/resources/cancelCallBtn.png</file>
 		<file>src/resources/cross.png</file>
+		<file>src/resources/db_icon.png</file>
+		<file>src/resources/declineCall_icon.png</file>
+		<file>src/resources/gray_cross.png</file>
+		<file>src/resources/ic_apartments.png</file>
+		<file>src/resources/ic_business.png</file>
+		<file>src/resources/ic_opened_door.png</file>
+		<file>src/resources/ic_RFIDcard_blue.png</file>
+		<file>src/resources/ic_RFIDcard.png</file>
+		<file>src/resources/ic_RFIDcard_red.png</file>
+		<file>src/resources/ic_thumb_up.png</file>
+		<file>src/resources/key_delete.png</file>
+		<file>src/resources/magnifyingGlass.png</file>
+		<file>src/resources/nextPage.png</file>
+		<file>src/resources/noConnectionIcon_kos.png</file>
+		<file>src/resources/noConnectionIcon.png</file>
+		<file>src/resources/notAccepted.png</file>
+		<file>src/resources/previousPage.png</file>
+		<file>src/resources/rfidArrow.png</file>
+		<file>src/resources/settingsIcon.png</file>
+		<file>src/resources/Small.png</file>
+		<file>src/resources/soundPlayingIco.png</file>
+		<file>src/resources/talkIcon.png</file>
+		<file>src/resources/top_logo.png</file>
+		<file>src/resources/units_icon_big.png</file>
+		<file>src/resources/units_icon_small.png</file>
+		<file>src/resources/user_icon.png</file>
+		<file>src/resources/user_icon_316.png</file>
+		<file>src/resources/volume_high.png</file>
+		<file>src/resources/volume_low.png</file>
 	</gresource>
 </gresources>

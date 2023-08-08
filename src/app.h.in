@@ -1,0 +1,64 @@
+#ifndef App_H
+#define App_H
+
+#include <stdint.h>
+#include <stdarg.h>
+#include <systemd/sd-bus.h>
+
+#define VERSION_MAJOR @version_major@
+#define VERSION_MINOR @version_minor@
+#define VERSION_REV @version_rev@
+
+// Allow unprivileged user
+#ifdef ALLOW_UNPRIVILEGED
+#define BUS_COMMON_FLAGS    SD_BUS_VTABLE_UNPRIVILEGED
+#else
+#define BUS_COMMON_FLAGS    0
+#endif
+
+#define BUFFER_SIZE     2048
+
+// UI service log levels
+#define LOG_LEVEL_ERROR     0
+#define LOG_LEVEL_INFO      1
+#define LOG_LEVEL_DEBUG     2
+
+
+
+
+// UI service log macros
+void selfLogFunction(const char *file, int line, const char *func, int lvl, const char* fmt, ...);
+#define selfLog(LVL, FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LVL, FMT __VA_OPT__(,) __VA_ARGS__)
+#define selfLogInf(FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LOG_LEVEL_INFO, FMT __VA_OPT__(,) __VA_ARGS__)
+#define selfLogDbg(FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LOG_LEVEL_DEBUG, FMT __VA_OPT__(,) __VA_ARGS__)
+#define selfLogErr(FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LOG_LEVEL_ERROR, FMT __VA_OPT__(,) __VA_ARGS__)
+
+//=============================================================================
+// DBUS Macros
+//=============================================================================
+// Defigo services
+#define DBUS_BASE_PATH                  "@dbus_base_path@"
+#define DBUS_BASE_NAME                  "@dbus_base_name@"
+#define DBUS_THIS                       "@dbus_this@"
+#define DBUS_GATEWAY                    "@dbus_gateway@"
+#define DBUS_THIS_PATH                  DBUS_BASE_PATH DBUS_THIS
+#define DBUS_THIS_NAME                  DBUS_BASE_NAME DBUS_THIS
+#define DBUS_GW_NAME                    DBUS_BASE_NAME DBUS_GATEWAY
+#define DBUS_GW_PATH                    DBUS_BASE_PATH DBUS_GATEWAY
+#define DBUS_THIS_INTERFACE             DBUS_THIS_NAME
+#define DBUS_GW_INTERFACE               DBUS_GW_NAME "." "Ui"
+
+#define UI_SIGNAL_OPEN_DOOR             "doorOpenRequest"
+#define UI_PROPERTY_CURRENT_VIEW        "currentView"
+#define UI_PROPERTY_STATE               "state"
+
+#define GW_SIGNAL_ON_DATA               "onUiData"
+#define GW_METHOD_GET_DATA              "getUiData"
+#define GW_PARAM_VOLUME                 "volume"
+#define GW_METHOD_SET_VOLUME            "sendVolume"
+#define GW_METHOD_SET_VOLUME_SGN        "u"
+#define GW_PARAM_BRIGHTNESS             "brightness"
+#define GW_METHOD_SET_BRIGHT            "sendBrightness"
+#define GW_METHOD_SET_BRIGHT_SGN        "u"
+
+#endif // App_H

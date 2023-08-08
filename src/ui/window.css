@@ -1,0 +1,105 @@
+.main_style {
+    background-color: #edf0fc;
+}
+
+.info_class {
+    color: #00134D;
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.logo_class {
+    border: none;
+}
+
+.top_button, .top_button:hover {
+    background: transparent none;
+    border: none;
+}
+
+.search_frame {
+    background-color: transparent;
+    border: 1px solid #CFD5E3;
+}
+
+.search_class {
+    background-color: transparent;
+    border: none;
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: #00134D;
+}
+
+.clear_btn {
+    background-color: transparent;
+}
+
+.pager_class {
+    background: #00134D;
+}
+
+.page_btn {
+    background-color: #00134D;
+    background-image: none;
+    border: none;
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.page_btn label {
+    color: #edf0fc;
+}
+
+
+.keypad_class {
+    background-color: #edf0fc;
+}
+
+.keypad_key {
+    background: #fff;
+    background-image: none;
+    border: 1px solid #4aa0d9;
+    border-radius: 5px;
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.keypad_key label {
+    color: #000;
+}
+
+.unit_box {
+    border: 1px solid #00134D;
+}
+
+.unit_text {
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    color: #00134D;
+}
+
+.unit_text_sel {
+    color: #fff;
+}
+
+.unit_desc {
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #656b7c;
+}
+
+.unit_desc_sel {
+    color: #fff;
+}
