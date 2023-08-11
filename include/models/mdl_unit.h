@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <glib.h>
+#include <systemd/sd-bus.h>
 
 #define UNIT_BASE_SIGNATURE             "tttttysssyyuu"
 #define UNIT_MEMBER_STRUCT_SIGNATURE    "(" UNIT_BASE_SIGNATURE ")"
@@ -67,9 +68,11 @@ typedef struct MdlUnitStruct {
     MdlUnitList *members;
 } MdlUnit;
 
-void mdl_unit_clean(MdlUnit *unit);
-void mdl_unit_list_clean(MdlUnitList *units);
-MdlUnit *mdl_unit_clone(MdlUnit *unit);
-MdlUnitList *mdl_unit_list_clone(MdlUnitList *units);
+void unit_clean(MdlUnit *unit);
+void unit_list_clean(MdlUnitList *units);
+MdlUnit *unit_clone(MdlUnit *unit);
+MdlUnitList *unit_list_clone(MdlUnitList *units);
+MdlUnitList *unit_list_append(MdlUnitList *units, MdlUnit *unit);
+MdlUnit *unit_parse_message(sd_bus_message *msg, int isMember);
 
 #endif // MODELS_MDL_UNIT_H

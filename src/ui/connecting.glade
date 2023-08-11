@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <!-- interface-css-provider-path window.css -->
+  <object class="GtkWindow" id="connectingWindow">
+    <property name="name">winMain</property>
+    <property name="width-request">800</property>
+    <property name="height-request">1280</property>
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="resizable">False</property>
+    <property name="default-width">800</property>
+    <property name="default-height">1280</property>
+    <property name="decorated">False</property>
+    <child>
+      <object class="GtkFixed">
+        <property name="width-request">800</property>
+        <property name="height-request">1280</property>
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="valign">start</property>
+        <child>
+          <object class="GtkImage" id="imgConnecting">
+            <property name="width-request">180</property>
+            <property name="height-request">180</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="resource">/com/getdefigo/ui/src/resources/Small.png</property>
+          </object>
+          <packing>
+            <property name="x">310</property>
+            <property name="y">602</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lblConnecting">
+            <property name="width-request">320</property>
+            <property name="height-request">73</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">center</property>
+            <property name="label" translatable="yes">Connecting...</property>
+            <property name="justify">center</property>
+            <style>
+              <class name="connecting_text"/>
+            </style>
+          </object>
+          <packing>
+            <property name="x">240</property>
+            <property name="y">497</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <style>
+      <class name="main_style"/>
+    </style>
+  </object>
+</interface>

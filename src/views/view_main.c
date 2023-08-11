@@ -3,16 +3,14 @@
 
 #include "app.h"
 #include "keypad.h"
-#include "view_main.h"
+#include "views/view_main.h"
 
-MdlDoorbell *main_data;
-static GtkApplication *app;
-GtkWidget *txtSearch = NULL;
-GtkWidget *window = NULL;
-GtkWidget *keypad = NULL;
-GtkWidget *keypad_fixed = NULL;
-GtkWidget *btnClose = NULL;
-GtkWidget *main_flow_box = NULL;
+static MdlDoorbell      *main_data;
+static GtkApplication   *app;
+static GtkWidget        *window;
+static GtkWidget        *txtSearch = NULL;
+static GtkWidget        *btnClose = NULL;
+static GtkWidget        *main_flow_box = NULL;
 
 static void on_back_button_clicked(GtkButton *btn, gpointer data) {
     gchar *txt;
@@ -74,38 +72,52 @@ void main_view_new_data(MdlDoorbell *data) {
     main_data = doorbell_clone(data);
 }
 
-void main_view_show() {
+AppState main_view_show(AppState old) {
+    selfLogDbg("show main (%p)", window);
+    if(!window) return old;
     gtk_widget_show(window);
+    return UI_MainView;
 }
 
-void main_view_init(GtkApplication *_app) {
-    app = _app;
+void main_view_hide() {
+    gtk_widget_hide(window);
+}
 
-    GtkCssProvider *css = gtk_css_provider_new();
-    gtk_css_provider_load_from_resource(css, "/com/getdefigo/ui/src/ui/window.css");
-
-    GdkScreen *screen = gdk_screen_get_default();
-    gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(css), GTK_STYLE_PROVIDER_PRIORITY_USER);
-
+gboolean main_view_init(GtkApplication *a) {
+    // Variables
     GtkWidget *btnBack, *btnPrev, *btnNext, *btnClear;
-    GtkBuilder *builder = gtk_builder_new_from_resource("/com/getdefigo/ui/src/ui/window.glade");
+    // Gtk builder
+    GtkBuilder  *builder = gtk_builder_new_from_resource("/com/getdefigo/ui/src/ui/window.glade");
+    if(!builder) {
+        selfLogErr("View builder error: %m");
+        return FALSE;
+    }
 
+    // Store app
+    app = a;
+
+    // Get window object
     window = GTK_WIDGET(gtk_builder_get_object(builder, "mainWindow"));
+    if(!window) {
+        selfLogErr("Get view window error: %m");
+        return FALSE;
+    }
 
+    // Set window to app
     gtk_window_set_application(GTK_WINDOW(window), app);
+    // Set fullscreen
     gtk_window_fullscreen(GTK_WINDOW(window));
-
+    // Connect signals (glade file)
     gtk_builder_connect_signals(builder, NULL);
-
+    // Get objects
     btnBack = GTK_WIDGET(gtk_builder_get_object(builder, "btnBack"));
     btnClose = GTK_WIDGET(gtk_builder_get_object(builder, "btnClose"));
     txtSearch = GTK_WIDGET(gtk_builder_get_object(builder, "searchEdit"));
     btnPrev = GTK_WIDGET(gtk_builder_get_object(builder, "btnPrev"));
     btnNext = GTK_WIDGET(gtk_builder_get_object(builder, "btnNext"));
     btnClear = GTK_WIDGET(gtk_builder_get_object(builder, "btnClear"));
-
     main_flow_box = GTK_WIDGET(gtk_builder_get_object(builder, "main_flow_box"));
-
+    // Connect objects signals
     g_signal_connect(window, "touch-event", G_CALLBACK(on_window_touch), NULL);
     g_signal_connect(btnBack, "clicked", G_CALLBACK(on_back_button_clicked), NULL);
     g_signal_connect(btnClose, "clicked", G_CALLBACK(on_close_button_clicked), NULL);
@@ -119,6 +131,10 @@ void main_view_init(GtkApplication *_app) {
 
     g_signal_connect(main_flow_box, "child-activated", G_CALLBACK(on_unit_box_activated), NULL);
 
-
+    // Init keypad
     keypad_init(builder, txtSearch);
+
+    selfLogDbg("init main finished (%p)", window);
+
+    return TRUE;
 }

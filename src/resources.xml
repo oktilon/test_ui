@@ -2,6 +2,7 @@
 <gresources>
 	<gresource prefix="/com/getdefigo/ui">
 		<file preprocess="xml-stripblanks">src/ui/window.glade</file>
+		<file preprocess="xml-stripblanks">src/ui/connecting.glade</file>
 		<file>src/ui/window.css</file>
 		<file>src/resources/backBtn.png</file>
 		<file>src/resources/blank.png</file>

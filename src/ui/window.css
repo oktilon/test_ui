@@ -103,3 +103,11 @@
 .unit_desc_sel {
     color: #fff;
 }
+
+.connecting_text {
+    font-family: Stratos;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    color: #00134D;
+}

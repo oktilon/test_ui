@@ -117,7 +117,7 @@ void selfLogFunction(const char *file, int line, const char *func, int lvl, cons
 
     // Output log to stdout
     if(lvl <= gLogLevel) {
-        printf("%s: [%s] %s%s\033[0m\n", buf, logLevelHeaders[lvl], logLevelColor[lvl], msg);
+        printf("%s: [%s] %s %s%s\033[0m\n", buf, logLevelHeaders[lvl], func, logLevelColor[lvl], msg);
         fflush(stdout);
     }
 
@@ -126,17 +126,19 @@ void selfLogFunction(const char *file, int line, const char *func, int lvl, cons
 }
 
 void on_app_activate(GtkApplication *_app) {
+    GatewayStatus gwStatus = GW_Initializing;
+
     ViewManager* manager = view_manager_init(app);
+    view_manager_show("connecting");
 
-    // display connecting screen?
-
-    selfLogInf("Initializing dbus... ViewMAnager=%p", manager);
-    if(dbus_init(manager, useSysBus) == 0) {
-        // Ok
+    selfLogInf("Initializing dbus");
+    int r = dbus_init(manager, useSysBus);
+    if(r == 0) {
+        gwStatus = dbus_get_gw_status();
+        view_manager_start(gwStatus);
     } else {
         selfLogErr("DBus init error");
     }
-    view_manager_show("main");
 }
 
 int main(int argc, char **argv) {
@@ -174,7 +176,7 @@ int main(int argc, char **argv) {
     g_signal_connect(app, "activate", G_CALLBACK(on_app_activate), NULL);
 
     selfLogInf("Start UI...");
-    status = g_application_run(G_APPLICATION(app), argc, argv);
+    status = g_application_run(G_APPLICATION(app), 0, NULL);
     g_object_unref(app);
     // Stop dbus task?
 

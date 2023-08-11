@@ -55,7 +55,10 @@ src = [
     'src/keypad.c',
     'src/models/mdl_unit.c',
     'src/models/mdl_doorbell.c',
-    'src/view_main.c',
+    'src/view.c',
+    'src/view_history.c',
+    'src/views/view_main.c',
+    'src/views/view_connecting.c',
     'src/view_manager.c',
     asresources,
 ]

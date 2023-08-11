@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdarg.h>
 #include <systemd/sd-bus.h>
+#include <gtk/gtk.h>
 
 #define VERSION_MAJOR @version_major@
 #define VERSION_MINOR @version_minor@
@@ -33,32 +34,77 @@ void selfLogFunction(const char *file, int line, const char *func, int lvl, cons
 #define selfLogDbg(FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LOG_LEVEL_DEBUG, FMT __VA_OPT__(,) __VA_ARGS__)
 #define selfLogErr(FMT, ...) selfLogFunction((const char *)(__FILE__), __LINE__, (const char *)(__PRETTY_FUNCTION__), LOG_LEVEL_ERROR, FMT __VA_OPT__(,) __VA_ARGS__)
 
-//=============================================================================
-// DBUS Macros
-//=============================================================================
-// Defigo services
+/**********************
+ *    THIS SERVICE
+ **********************/
+// Common data
 #define DBUS_BASE_PATH                  "@dbus_base_path@"
 #define DBUS_BASE_NAME                  "@dbus_base_name@"
+// Service names
 #define DBUS_THIS                       "@dbus_this@"
-#define DBUS_GATEWAY                    "@dbus_gateway@"
 #define DBUS_THIS_PATH                  DBUS_BASE_PATH DBUS_THIS
 #define DBUS_THIS_NAME                  DBUS_BASE_NAME DBUS_THIS
-#define DBUS_GW_NAME                    DBUS_BASE_NAME DBUS_GATEWAY
-#define DBUS_GW_PATH                    DBUS_BASE_PATH DBUS_GATEWAY
 #define DBUS_THIS_INTERFACE             DBUS_THIS_NAME
-#define DBUS_GW_INTERFACE               DBUS_GW_NAME "." "Ui"
-
-#define UI_SIGNAL_OPEN_DOOR             "doorOpenRequest"
+// Methods
+// TBD...
+// Properties
 #define UI_PROPERTY_CURRENT_VIEW        "currentView"
 #define UI_PROPERTY_STATE               "state"
+#define UI_PROPERTY_STATE_NAME          "stateName"
+// Signals
+#define UI_SIGNAL_OPEN_DOOR             "doorOpenRequest"
 
-#define GW_SIGNAL_ON_DATA               "onUiData"
-#define GW_METHOD_GET_DATA              "getUiData"
-#define GW_PARAM_VOLUME                 "volume"
-#define GW_METHOD_SET_VOLUME            "sendVolume"
-#define GW_METHOD_SET_VOLUME_SGN        "u"
-#define GW_PARAM_BRIGHTNESS             "brightness"
-#define GW_METHOD_SET_BRIGHT            "sendBrightness"
-#define GW_METHOD_SET_BRIGHT_SGN        "u"
+/**********************
+ *   GATEWAY SERVICE
+ **********************/
+// Gateway names
+#define DBUS_GATEWAY                    "@dbus_gateway@"
+#define DBUS_GW_NAME                    DBUS_BASE_NAME DBUS_GATEWAY
+#define DBUS_GW_PATH                    DBUS_BASE_PATH DBUS_GATEWAY
+#define DBUS_GW_IFACE_UI                DBUS_GW_NAME "." "Ui"
+#define DBUS_GW_IFACE_CONN              DBUS_GW_NAME "." "Connection"
+// Connection methods
+#define GW_METHOD_SET_SERVER            "setServer"
+#define GW_METHOD_CONNECT               "connect"
+// Connection properties
+#define GW_PROP_UUID                    "uuid"
+#define GW_PROP_SERVER                  "server"
+#define GW_PROP_STATUS                  "status"
+#define GW_PROP_STATUS_NAME             "statusName"
+// Connection signals
+#define GW_SIG_CONNECTED                "connected"
+#define GW_SIG_DISCONNECTED             "disconnected"
+#define GW_SIG_AUTHORIZED               "authorized"
+#define GW_SIG_RESTART_ALL              "restartAll"
+// UI methods
+#define GW_METHOD_SEND_VOLUME           "sendVolume"
+#define GW_METHOD_SEND_BRIGHTNESS       "sendBrightness"
+#define GW_METHOD_GET_UI_DATA           "getUiData"
+#define GW_METHOD_GET_SS_DATA           "getScreenSaverData"
+// UI properties
+#define GW_PROP_VOLUME                  "volume"
+#define GW_PROP_BRIGHTNESS              "brightness"
+// UI signals
+#define GW_SIG_UI_DATA                  "onUiData"
+#define GW_SIG_SS_DATA                  "onScreenSaverData"
+
+
+/*************************
+ *  SERVICE ENUMERATIONS
+ *************************/
+typedef enum AppStateEnum {
+      UI_Initializing
+    , UI_Connecting
+    , UI_MainView
+} AppState;
+
+typedef enum GatewayStatusEnum {
+      GW_Initializing
+    , GW_Connecting
+    , GW_Connected
+    , GW_Online
+    , GW_Disconnected
+    , GW_WaitForModem
+} GatewayStatus;
 
 #endif // App_H

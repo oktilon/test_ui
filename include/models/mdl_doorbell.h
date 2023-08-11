@@ -17,6 +17,7 @@ typedef union {
         uint8_t enableImg           :1;
         uint8_t hiddenSearchBar     :1;
         uint8_t hiddenButtons       :1;
+        uint8_t :4;
     };
 } mdlDoorbellConfig;
 
